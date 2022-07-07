@@ -1,10 +1,18 @@
  import UserModel from "../models/users";
+ import HandlePassword from "../utils/handlepassword";
+
 
 class UserServiceS{
+    // login
+    static  async loginUser(req){
+        const user = await UserModel.findOne({email:req.body.email});
+        return user;
+    }
 
 //function that register user
 
     static async registerUser(req){
+        req.body.password = HandlePassword.encryptPassword(req.body.password)
         const user = await UserModel.create(req.body);
 
          return user;
@@ -13,8 +21,9 @@ class UserServiceS{
 
      // Function that that get all users
 
-     static async getAll(req){
-        const user = await UserModel.find(req.body);
+     static async getUsers(){
+        const user = await UserModel.find();
+        // console.log(user)
 
          return user;
 
@@ -23,22 +32,29 @@ class UserServiceS{
      // function that delete user
 
 
-     static async deleteUser(req){
-        const user = await UserModel.deleteOne({_id:req.params.id});
+     static async deleteUser(req)
+     {
+        const user = await UserModel.find();
 
          return user;
+
 
      }
 
      // function that update user
      
      static async updateUser(req){
-        await UserModel.findOneAndUpdate({_id:req.params.id},req.body);
-        const user = await UserModel.findOne({_id:req.params.id});
+       const user = await UserModel.findByIdAndUpdate(req.params.id,req.body,{new:true});
+
+        // const user =  UserModel.findOne({_id:req.params.id});
 
          return user;
 
      }
+
+
+
+    
 
 
     static testServiceFunction(req) {
