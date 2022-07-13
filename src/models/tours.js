@@ -6,8 +6,8 @@ const tourSchema = new mongoose.Schema(
             title: String,
             location:String,
             duration: {
-                startdate:Date,
-                enddate: Date,
+                startAt:Date,
+                endAt: Date,
               },
               description:String,
               seat: String,
@@ -18,8 +18,10 @@ const tourSchema = new mongoose.Schema(
                 type: Boolean,
                 default: true,
               },
-              createdby:{
-                userid: Number,
+              createdby:
+              {
+                type:mongoose.Schema.ObjectId,
+                ref:"User"
 
               },
 
@@ -27,7 +29,18 @@ const tourSchema = new mongoose.Schema(
         
         },
         { timestamps: true }
+
     
 );
+
+tourSchema.pre(/^find/, function(next){
+  this.populate({
+    path:"createdby",
+  })
+  next();})
+
+
+
+
 const tour = mongoose.model("Tour",tourSchema);
 export default tour;

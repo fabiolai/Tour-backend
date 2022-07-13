@@ -1,4 +1,5 @@
 import tourServices from "../services/tourservice";
+import Response from "../utils/response";
 
 
 class tourController{
@@ -7,9 +8,11 @@ class tourController{
   static async registerTour(req, res) {
     const newTour = await tourServices.registerTour(req);
     if (!newTour) {
-      return res.status(401).json({ message: "failed to register" });
+      //return Response.errorMessage(res,"failed to register tour", 400)
+     return res.status(400).json({ message: "failed to register" });
     }
-    return res.status(200).json({ message: "success", data: newTour });
+    //return Response.errorMessage(res,"failed to register tour", 400)
+    return res.status(200).json({ message: "registered", data: newTour });
   }
 
 

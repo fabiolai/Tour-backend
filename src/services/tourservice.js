@@ -18,6 +18,7 @@ class TourServices {
       return tour;
 
   }
+  
 
   // Function that get all tour
 

@@ -2,9 +2,10 @@ import { Router } from "express";
 import UserController from "../controller/usercontroller";
 import app from "../server";
 import tourController from "../controller/tourController";
+import BookingController from "../controller/bookingcontroller";
+
 
 const route =Router();
-
 
 route.post("/user/login", UserController.loginUserController);
 route.post("/user/test", UserController.testController);
@@ -15,6 +16,9 @@ route.patch("/user/update/:id",UserController.updateUser);
 route.post("/tour/create", tourController.registerTour);
 route.patch("/tour/update/:id",tourController.updateTour);
 route.get("/tour/get",tourController.getTour);
+route.post("/booking",BookingController.BokingTour);
+
+
 
 
 
