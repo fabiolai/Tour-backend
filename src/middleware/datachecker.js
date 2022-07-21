@@ -1,26 +1,28 @@
-import userInfo from"../models/users";
 
- class Datachecker{
+import UserInfo from "../models/users"
 
-    static validateEmailDuplication = async(req,res, next)=>{
-        const email = await userInfo.findONE({email:req.body.email});
+class Datachecker{
+    static validateEmailDuplication=async (req,res,next)=>{
+        const email=await UserInfo.findOne({email:req.body.email});
 
-        if (!email){
-            return next();
+        //console email
+
+        if(!email){
+            return next()
         }
         return res.status(404).json({
             status:404,
             message:"email already exist"
         })
     }
-    static checkAge = (req,res,next) =>{
+    static checkAge=(req,res,next)=>{ 
         if (req.body.age<18){
-               return res.status(404).json({
+            return res.status(404).json({
                 status:404,
-                message:"your are under age.no access "
-               })
+                message:"you are under age. no access"
+            })
         }
-        return next ();
+        return next();
     }
- }
+}
 export default Datachecker;

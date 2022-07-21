@@ -14,6 +14,8 @@ class UserController {
         email:user.email,
         picture: user.picture,
         names: user.names,
+        role:user.role
+
       })
       return res.status(200).json({ message: "logged in successfully" , token});
     } else {

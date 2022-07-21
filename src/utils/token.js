@@ -13,7 +13,7 @@ import dotenv from "dotenv";
     //decode token
 
     static decodeToken (token){
-        const data = jwt.sign(token, process.env.JWT_KEY);
+        const data = jwt.verify(token, process.env.JWT_KEY);
         return data;
     }
 }
